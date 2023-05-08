@@ -1,0 +1,166 @@
+swagger: "2.0"
+info:
+  description: Node.js Rest API doc
+  version: "1.0.0"
+  title: Node Rest API documentation
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: roshanbhuvad15@gmail.com
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: localhost:8080
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  
+  /employee:
+    post:
+      tags:
+        - Employee Module
+      summary: Employee API
+      description: API for creating Employee
+      parameters:
+        - in: body
+          name: body
+          description: Create Employee Payload
+          required: true
+          schema:
+            $ref: "#/definitions/Employee"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Employee Created Successfully
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+    get:
+      tags:
+        - Employee Module
+      summary: Employee API
+      description: API for fetching all Employees
+      parameters:
+        - name: skip
+          in: query
+          description: No.of record to be skipped for pagination
+          type: number
+          required: false
+        - name: limit
+          in: query
+          description: no. of record api should return for pagination
+          type: number
+          required: false
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Employee fetched Successfully
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+  "/employee/{id}":
+    get:
+      tags:
+        - Employee Module
+      summary: Fetch Employee Detail
+      description: Fetch Employee Detail
+      parameters:
+        - name: id
+          in: path
+          description: Employee Id
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Employee Fetched Successfully
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+    put:
+      tags:
+        - Employee Module
+      summary: Update Employee
+      description: Update Employee
+      parameters:
+        - name: id
+          in: path
+          description: Employee Id
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Update Employee Payload
+          required: true
+          schema:
+            $ref: "#/definitions/Employee"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Employee Updated Successfully
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+    delete:
+      tags:
+        - Employee Module
+      summary: Remove Employee
+      description: Remove Employee
+      parameters:
+        - name: id
+          in: path
+          description: Employee Id
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        204:
+          description: Employee Deleted Successfully
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+definitions:
+  Employee:
+    properties:
+      fullname:
+        type: string
+        description: Employee name
+      salary:
+        type: number
+        description: Employee Salary
+      emailId:
+        type: string
+        description: Employee Email
+      age:
+        type: number
+        description: Employee Age     
+      mobile:
+        type: string
+        description: Employee Mobile Number
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object

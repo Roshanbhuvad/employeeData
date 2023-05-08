@@ -22,6 +22,7 @@ const schema = Joi.object().keys({
  salary: Joi.number(),
   age: Joi.number(),
   mobile: Joi.string().length(12),
+  emailId: Joi.string().email(),
 });
 return validateRequestBody(reqData, schema)
 }
