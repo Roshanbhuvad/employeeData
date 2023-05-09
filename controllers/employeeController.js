@@ -31,11 +31,11 @@ module.exports.createEmployee = async (req, res) => {
 module.exports.getAllEmployee = async (req, res) => {
   let response = { ...constants.defaultServerResponse }; //declared the object
   try {
-    const responseFromService = await employeeService.getAllEmployees(req.query); //this req.query going to send skip & limit values to the getAllProduct service//createProduct is a function
+    const responseFromService = await employeeService.getAllEmployees(req.query); 
 
     response.status = 200;
 
-    response.message = constants.employeeMessage.EMPLOYEE_FETCHED; //here we are importing the message from constants folder and calling productMessage object and key PRODUCT-CREATED
+    response.message = constants.employeeMessage.EMPLOYEE_FETCHED;
     response.body = responseFromService;
   } catch (error) {
     console.log("Something went wrong: Controller: getAllEmployee", error);
@@ -45,16 +45,15 @@ module.exports.getAllEmployee = async (req, res) => {
   return res.status(response.status).send(response);
 };
 
-// This controller for fetching the product by their ID
+
 module.exports.getEmployeeById = async (req, res) => {
   let response = { ...constants.defaultServerResponse }; //declared the object
   try {
     const responseFromService = await employeeService.getEmployeeById(req.params); //So your path params are basically presents inside of the req.params
-    //All we need to do a product service for getProductById
 
     response.status = 200;
 
-    response.message = constants.employeeMessage.EMPLOYEE_FETCHED; //here we are importing the message from constants folder and calling productMessage object and key PRODUCT-CREATED
+    response.message = constants.employeeMessage.EMPLOYEE_FETCHED;
     response.body = responseFromService;
     
   } catch (error) {
@@ -66,7 +65,7 @@ module.exports.getEmployeeById = async (req, res) => {
   return res.status(response.status).send(response);
 };
 
-// This controller for updating the product by their ID
+// This controller for updating the Employee by their ID
 module.exports.updateEmployee = async (req, res) => {
   let response = { ...constants.defaultServerResponse }; //declared the object
   try {
@@ -74,13 +73,12 @@ module.exports.updateEmployee = async (req, res) => {
     if (isValid) {
     const responseFromService = await employeeService.updateEmployeeDetails({
       id: req.params.id,
-      updateInfo: req.body, //Here I am getting ID and req.body for updating the existing product from PUT method
-    }); //So path params are basically presents inside of the req.params
-    //need to do a product service for updateProduct
+      updateInfo: req.body, 
+    }); 
 
     response.status = 200;
 
-    response.message = constants.employeeMessage.EMPLOYEE_UPDATED; //here we are importing the message from constants folder and calling productMessage object and key PRODUCT_UPDATED
+    response.message = constants.employeeMessage.EMPLOYEE_UPDATED;
     response.body = responseFromService;
   }
   else  {
@@ -100,9 +98,6 @@ module.exports.deleteEmployee = async (req, res) => {
   let response = { ...constants.defaultServerResponse }; //declared the object
   try {
     const responseFromService = await employeeService.deleteEmployee(req.params);
-    //Here getting  re.params for deleting the existing product from DELETE method;
-    //So path params are basically presents inside of the req.params
-
     response.status = 200;
 
     response.message = constants.employeeMessage.EMPLOYEE_DELETED;

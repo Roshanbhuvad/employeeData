@@ -6,13 +6,13 @@ const constants = require("../constants");
 module.exports.createEmployee = async (serviceData) => {
   try {
     
-    let newEmployee = new Employee({ ...serviceData }); // have created instance of the productModel and pass required data from serviceData and called the save method to insert the data Here we have used spread operator to defined the serviceData object as an arguments
+    let newEmployee = new Employee({ ...serviceData });
    
     let result = await newEmployee.save(); 
    
-    return formatMongoData(result); //This formatMongoData method  have declared in the dbHelper.js, This is only apply to the single document(1 record in mongoDB is the one document)
+    return formatMongoData(result); 
   } catch (error) {
-    console.log("Something went wrong: Service: createProduct", error);
+    console.log("Something went wrong: Service: createEmployee", error);
     throw new Error(error);
   }
 };
@@ -26,7 +26,7 @@ module.exports.getAllEmployees = async ({ skip = 0, limit = 10 }) => {
     
     return formatMongoData(employees);
   } catch (error) {
-    console.log("Something went wrong: Service: getAllProducts", error);
+    console.log("Something went wrong: Service: getAllEmployee", error);
     
     throw new Error(error);
   }
@@ -66,7 +66,7 @@ module.exports.updateEmployeeDetails = async ({ id, updateInfo }) => {
     
     return formatMongoData(updateEmployee);
   } catch (error) {
-    console.log("Something went wrong: Service: updateProduct", error);
+    console.log("Something went wrong: Service: updateEMployee", error);
  t
     throw new Error(error);
   }
